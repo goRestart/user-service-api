@@ -12,7 +12,7 @@ private struct Parameter {
   static let email = "email"
 }
 
-public struct UserApiClient: UserApi {
+struct UserApiClient: UserApi {
 
   private let client: ClientProtocol
   
