@@ -12,8 +12,14 @@ private struct Parameter {
   static let email = "email"
 }
 
-public struct UserAPI {
+public struct UserApiClient: UserApi {
 
+  private let client: ClientProtocol
+  
+  init(client: ClientProtocol) {
+    self.client = client
+  }
+  
   public func register(_ credentials: BasicCredentials) -> Response {
     let query = [
       Parameter.username: credentials.username,
@@ -29,18 +35,5 @@ public struct UserAPI {
       Parameter.password: credentials.password
     ]
     return try! client.post(Endpoint.verify, query: query)
-  }
-}
-
-extension UserAPI {
-  private var client: ClientProtocol {
-    return try! Config()
-      .resolveClient()
-      .makeClient(
-        hostname: "user.restart-api.com",
-        port: 80,
-        securityLayer: .none,
-        proxy: nil
-    )
   }
 }

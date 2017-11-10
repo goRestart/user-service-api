@@ -3,7 +3,7 @@ import XCTest
 
 class user_service_apiTests: XCTestCase {
   
-  let userApi = UserAPI()
+  let userApi = UserServiceApiFactory.make()
   
   func test_register_user_with_basic_credentials() {
     let credentials = BasicCredentials(
