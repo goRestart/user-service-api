@@ -9,8 +9,8 @@ public struct UserServiceApiFactory {
   }
   
   private static var client: ClientProtocol {
-    return try! Config()
-      .resolveClient()
+    return try! EngineClient
+      .factory
       .makeClient(
         hostname: "user.restart-api.com",
         port: 80,
