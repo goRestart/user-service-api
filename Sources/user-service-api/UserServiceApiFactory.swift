@@ -2,13 +2,15 @@ import Vapor
 
 public struct UserServiceApiFactory {
   
-  public static func make() -> UserApi {
+  public init() {}
+  
+  public func make() -> UserApi {
     return UserApiClient(
       client: client
     )
   }
   
-  private static var client: ClientProtocol {
+  private var client: ClientProtocol {
     return try! EngineClient
       .factory
       .makeClient(
@@ -19,3 +21,4 @@ public struct UserServiceApiFactory {
     )
   }
 }
+
