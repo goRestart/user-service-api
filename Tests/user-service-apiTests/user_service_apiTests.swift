@@ -2,25 +2,15 @@ import XCTest
 @testable import user_service_api
 
 class user_service_apiTests: XCTestCase {
+ 
+  private let verifyUserCredentials = VerifyUserCredentials()
   
-  let userApi = UserServiceApiFactory.make()
-  
-  func test_register_user_with_basic_credentials() {
-    let credentials = BasicCredentials(
-      username: "test",
-      password: "1234567",
-      email: "test@test.com"
-    )
-    let response = userApi.register(credentials)
-    XCTAssertNotNil(response)
-  }
-  
-  func test_verify_credentials() {
+  func test_verify_credentials() throws {
     let credentials = UserCredentials(
       username: "test",
-      password: "1234561"
+      password: "123456"
     )
-    let response = userApi.verify(credentials)
-    XCTAssertNotNil(response)
+    let response = try verifyUserCredentials.execute(with: credentials)
+    XCTAssertNotNil(response?.user)
   }
 }
