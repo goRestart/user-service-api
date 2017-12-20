@@ -1,16 +1,8 @@
+import CoreService
 import Vapor
 
-public struct UserServiceApiFactory {
-  
-  public init() {}
-  
-  public func make() -> UserApi {
-    return UserApiClient(
-      client: client
-    )
-  }
-  
-  private var client: ClientProtocol {
+extension Assembly {
+  var httpClient: ClientProtocol {
     return try! EngineClient
       .factory
       .makeClient(
@@ -21,4 +13,3 @@ public struct UserServiceApiFactory {
     )
   }
 }
-
