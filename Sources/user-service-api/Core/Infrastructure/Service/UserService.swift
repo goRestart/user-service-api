@@ -3,13 +3,13 @@ import Vapor
 
 struct UserService {
   
-  private let client: ClientProtocol
+  private let clientProvider: ClientProvider
   private let userMapper: UserMapper
 
-  init(client: ClientProtocol,
+  init(clientProvider: ClientProvider,
        userMapper: UserMapper)
   {
-    self.client = client
+    self.clientProvider = clientProvider
     self.userMapper = userMapper
   }
   
@@ -32,7 +32,7 @@ struct UserService {
   
   private func unwrap(_ endpoint: Endpoint) throws -> Response? {
     do {
-      return try client.get(endpoint.path)
+      return try clientProvider.client().get(endpoint.path)
     } catch {
       return nil
     }

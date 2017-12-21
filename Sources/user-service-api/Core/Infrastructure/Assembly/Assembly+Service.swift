@@ -3,7 +3,7 @@ import CoreService
 extension Assembly {
   var userService: UserService {
     return UserService(
-      client: httpClient,
+      clientProvider: self,
       userMapper: userMapper
     )
   }
